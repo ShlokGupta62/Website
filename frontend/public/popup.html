@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hackathon Monitor</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="header">
+    <span class="logo">🟡</span>
+    <span class="title">Hackathon Monitor</span>
+    <button id="btn-options" class="icon-btn" title="Settings">⚙️</button>
+  </div>
+
+  <div id="connection-banner" class="banner banner-error hidden">
+    ⚠️ Cannot reach backend — check Settings
+  </div>
+
+  <div id="loading" class="centered">
+    <div class="spinner"></div>
+    <span>Connecting…</span>
+  </div>
+
+  <div id="no-hackathons" class="centered hidden">
+    <p>No hackathons found.</p>
+    <p style="color:#8b949e;font-size:0.8rem;">Make sure the backend is running.</p>
+  </div>
+
+  <!-- Hackathon selector -->
+  <div id="main-content" class="hidden">
+    <div class="section-row">
+      <select id="hackathon-select"></select>
+      <button id="btn-refresh" class="icon-btn" title="Refresh now">🔄</button>
+    </div>
+
+    <!-- Active hackathon info bar -->
+    <div id="hackathon-meta" class="meta-bar"></div>
+
+    <!-- Summary pills -->
+    <div id="summary-pills" class="pills-row"></div>
+
+    <!-- Team list -->
+    <div id="team-list"></div>
+
+    <!-- Footer actions -->
+    <div class="footer-actions">
+      <button id="btn-participant" class="action-btn">👥 Participant View</button>
+      <button id="btn-judge" class="action-btn action-btn-accent">⚖️ Judge View</button>
+    </div>
+
+    <div id="last-update" class="timestamp"></div>
+  </div>
+</body>
+<script src="popup.js"></script>
+</html>

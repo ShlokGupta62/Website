@@ -1,0 +1,225 @@
+/* ──────────────────────────────────────────────
+   Popup styles – Hackathon Monitor extension
+   ────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  width: 360px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  background: #0d1117;
+  color: #e6edf3;
+  min-height: 80px;
+}
+
+/* ── Header ─────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+}
+
+.logo { font-size: 1.1rem; }
+
+.title {
+  flex: 1;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #f0f6fc;
+}
+
+/* ── Buttons ─────────────────────────────────── */
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 2px 4px;
+  border-radius: 4px;
+  line-height: 1;
+  transition: background 0.15s;
+}
+.icon-btn:hover { background: #21262d; }
+
+/* ── Banners ─────────────────────────────────── */
+.banner {
+  padding: 7px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.banner-error { background: #3d1a1a; color: #f85149; }
+.banner-warn  { background: #2d2208; color: #e3b341; }
+.hidden { display: none !important; }
+
+/* ── Loading / empty states ─────────────────── */
+.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  gap: 10px;
+  color: #8b949e;
+  font-size: 0.85rem;
+}
+
+.spinner {
+  width: 22px; height: 22px;
+  border: 3px solid #30363d;
+  border-top-color: #eab308;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Section row (select + refresh) ─────────── */
+.section-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 12px 6px;
+}
+
+select {
+  flex: 1;
+  background: #161b22;
+  border: 1px solid #30363d;
+  color: #e6edf3;
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+select:focus { outline: none; border-color: #eab308; }
+
+/* ── Meta bar ────────────────────────────────── */
+.meta-bar {
+  padding: 4px 12px 6px;
+  font-size: 0.76rem;
+  color: #8b949e;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.meta-bar .status-badge {
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-size: 0.72rem;
+}
+.badge-active   { background: #0d3321; color: #3fb950; }
+.badge-upcoming { background: #0c2031; color: #58a6ff; }
+.badge-past     { background: #21262d; color: #8b949e; }
+
+/* ── Summary pills ───────────────────────────── */
+.pills-row {
+  display: flex;
+  gap: 8px;
+  padding: 4px 12px 8px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #21262d;
+  color: #8b949e;
+}
+.pill-green  { background: #0d3321; color: #3fb950; }
+.pill-red    { background: #3d1a1a; color: #f85149; }
+.pill-yellow { background: #2d2208; color: #e3b341; }
+
+/* ── Team list ───────────────────────────────── */
+#team-list {
+  border-top: 1px solid #21262d;
+  max-height: 260px;
+  overflow-y: auto;
+}
+#team-list::-webkit-scrollbar { width: 4px; }
+#team-list::-webkit-scrollbar-thumb { background: #30363d; border-radius: 2px; }
+
+.team-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 8px;
+  border-bottom: 1px solid #161b22;
+  transition: background 0.1s;
+}
+.team-row:hover { background: #161b22; }
+
+.team-score-ring {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  position: relative;
+}
+
+.team-info { flex: 1; min-width: 0; }
+.team-name {
+  font-weight: 600;
+  font-size: 0.83rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.team-sub {
+  font-size: 0.72rem;
+  color: #8b949e;
+  margin-top: 1px;
+}
+
+.verdict-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 8px;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+.verdict-pure     { background: #0d3321; color: #3fb950; }
+.verdict-suspect  { background: #2d2208; color: #e3b341; }
+.verdict-cheating { background: #3d1a1a; color: #f85149; }
+.verdict-unknown  { background: #21262d; color: #8b949e; }
+
+/* ── Footer actions ──────────────────────────── */
+.footer-actions {
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px;
+  border-top: 1px solid #21262d;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 7px 8px;
+  border: 1px solid #30363d;
+  background: #21262d;
+  color: #e6edf3;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: background 0.15s, border-color 0.15s;
+}
+.action-btn:hover { background: #30363d; }
+.action-btn-accent {
+  background: #1a2a10;
+  border-color: #3fb950;
+  color: #3fb950;
+}
+.action-btn-accent:hover { background: #243320; }
+
+/* ── Timestamp ───────────────────────────────── */
+.timestamp {
+  padding: 4px 12px 8px;
+  font-size: 0.7rem;
+  color: #484f58;
+  text-align: right;
+}

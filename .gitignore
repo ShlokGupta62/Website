@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+.npm
+
+# Build output
+frontend/dist/
+frontend/.vite/
+
+# Environment / secrets
+backend/.env
+!backend/.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel/

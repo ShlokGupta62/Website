@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hackathon Monitor – Settings</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <span class="logo">🟡</span>
+      <div>
+        <h1>Hackathon Monitor</h1>
+        <p class="sub">Extension Settings</p>
+      </div>
+    </header>
+
+    <form id="settings-form">
+      <!-- Backend URL -->
+      <div class="field">
+        <label for="backend-url">Backend API URL</label>
+        <p class="hint">URL of the Express backend (default: <code>http://localhost:5000</code>)</p>
+        <input type="url" id="backend-url" placeholder="http://localhost:5000" />
+      </div>
+
+      <!-- Frontend URL -->
+      <div class="field">
+        <label for="frontend-url">Frontend URL</label>
+        <p class="hint">URL of the React frontend — used for "Open Dashboard" buttons (default: <code>http://localhost:3000</code>)</p>
+        <input type="url" id="frontend-url" placeholder="http://localhost:3000" />
+      </div>
+
+      <!-- Poll interval -->
+      <div class="field">
+        <label for="poll-interval">Poll Interval (seconds)</label>
+        <p class="hint">How often the background worker checks for new flags (min: 15 s)</p>
+        <input type="number" id="poll-interval" min="15" max="3600" step="5" placeholder="30" />
+      </div>
+
+      <!-- Notifications toggle -->
+      <div class="field field-row">
+        <div>
+          <label for="notify-toggle">Desktop Notifications</label>
+          <p class="hint">Show a notification when a team is flagged for the first time</p>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="notify-toggle" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="btn-row">
+        <button type="submit" id="save-btn" class="btn-primary">Save</button>
+        <button type="button" id="reset-btn" class="btn-secondary">Reset to Defaults</button>
+      </div>
+
+      <div id="status-msg" class="status-msg hidden"></div>
+    </form>
+
+    <!-- Connection test -->
+    <section class="card">
+      <h2>Connection Test</h2>
+      <p class="hint" style="margin-bottom:10px">Verify the extension can reach your backend.</p>
+      <div class="btn-row">
+        <button id="test-btn" class="btn-secondary">Test Connection</button>
+      </div>
+      <div id="test-result" class="test-result hidden"></div>
+    </section>
+
+    <!-- Status / debug -->
+    <section class="card">
+      <h2>Status</h2>
+      <dl id="status-dl" class="status-dl">
+        <dt>Last poll</dt><dd id="st-last-poll">—</dd>
+        <dt>Flagged teams</dt><dd id="st-flagged">—</dd>
+        <dt>Extension version</dt><dd id="st-version">—</dd>
+      </dl>
+    </section>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
