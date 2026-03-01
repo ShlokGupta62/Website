@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
+const fallbackRouter = require("./fallback/router");
 
 const webhookRoutes = require("./routes/webhook");
 const hackathonRoutes = require("./routes/hackathon");
@@ -48,16 +49,26 @@ app.use("/api/webhook", express.raw({ type: "application/json" }));
 app.use(express.json());
 
 // ── Serverless DB connect (Vercel) ──────────────────
-// When @vercel/node imports this file, require.main !== module.
-// We add a one-time lazy-connect middleware here, BEFORE routes, so
-// every request ensures the DB is ready before hitting a handler.
+// Tries to connect once. On failure, sets res.locals.useStaticData = true
+// so the fallback router below serves demo data instead of hitting Mongoose.
 let _dbConnected = false;
-app.use(async (_req, _res, next) => {
-  if (!_dbConnected) {
-    try { await connectDB(); _dbConnected = true; } catch (e) { return next(e); }
+let _dbFailed    = false;
+app.use(async (_req, res, next) => {
+  if (_dbConnected) return next();
+  if (_dbFailed)    { res.locals.useStaticData = true; return next(); }
+  try {
+    await connectDB();
+    _dbConnected = true;
+  } catch (e) {
+    console.warn("[db] MongoDB unavailable – serving static demo data.", e.message);
+    _dbFailed = true;
+    res.locals.useStaticData = true;
   }
   next();
 });
+
+// ── Fallback router (static demo data when DB is down) ──
+app.use(fallbackRouter);
 
 // ── Routes ────────────────────────────────────────────
 app.use("/api/webhook", webhookRoutes);
