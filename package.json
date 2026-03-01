@@ -2,7 +2,7 @@
   "name": "hackathon-monitor",
   "private": true,
   "scripts": {
-    "build": "cd frontend && npm install && npx vite build",
-    "dev": "echo 'Use: cd frontend && npm run dev'"
+    "build": "cd backend && npm install --production && cd ../frontend && npm install && npx vite build",
+    "dev": "echo Use: cd frontend && npm run dev"
   }
 }
